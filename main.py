@@ -123,22 +123,22 @@ while True:
     if rocket.pos.y < target.pos.y-tether and falling:
 
         # rocket momentum = mass times velocity
-        momentum = rocket.mass * mag(rocket.velocity)
-        mass = rocket.mass
+        momentum        = rocket.mass * mag(rocket.velocity)
+        mass            = rocket.mass
 
         for drone in drones:
 
-            momentum += drone.mass * mag(drone.velocity)
-            mass += drone.mass
+            momentum    += drone.mass * mag(drone.velocity)
+            mass        += drone.mass
             drone.mass  += rocket.mass / len(drones)
 
-        velocity = momentum / mass
-        rv = norm(rocket.velocity)
-        rv.mag = velocity
+        velocity        = momentum / mass
+        r_vel           = norm(rocket.velocity)
+        r_vel.mag       = velocity
 
         for drone in drones:
 
-            drone.velocity += rv
+            drone.velocity += r_vel
 
         rocket.mass     = 0
         falling         = False
