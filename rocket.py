@@ -18,7 +18,7 @@ class Rocket(object):
         self.render     = cylinder(pos=self.pos, axis=self.axis, radius=self.radius)
         self.Xa         = 6.0
 
-    def update(self, wind):
+    def update(self, wind, parachute):
 
         acceleration    = vector(0, gravity, 0)
         velocity        = vector(self.velocity) + wind.velocity
@@ -28,6 +28,9 @@ class Rocket(object):
         self.velocity   += drag * dt
         self.pos        += self.velocity * dt
         self.render.pos = self.pos
+
+        for v in parachute.vertices:
+            v.pos       += self.velocity * dt
 
 
     def calcDrag(self, v):

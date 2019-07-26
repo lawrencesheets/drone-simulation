@@ -7,6 +7,8 @@ from        drone       import Drone
 from        rocket      import Rocket
 from        wind        import Wind
 from        sine        import Sine
+from        parachute   import Parachute
+
 
 
 scene                   = canvas(height=800, width=1200)
@@ -74,6 +76,7 @@ d                       = vertex(pos=drones[3].pos-(y_hat*tether), color=color.g
 net                     = quad( v0=a, v1=b, v2=c, v3=d)
 
 rocket                  = Rocket()
+parachute               = Parachute(rocket)
 wind                    = Wind()
 
 trajectory              = cylinder(pos=rocket.pos, axis=vector(0,-rocket.pos.y,0), color=color.black, radius=0.25, opacity=0.25)
@@ -99,7 +102,7 @@ while True:
     wind.scale(points[len(points)-1-elapsed])
 
     if falling:
-        rocket.update(wind)
+        rocket.update(wind, parachute)
     else:
         rocket.pos.y    = sum([d.pos.y for d in drones]) / len(drones) - tether
         if angle < 180:
@@ -121,6 +124,10 @@ while True:
     scene.center        = target.pos
 
     if rocket.pos.y < target.pos.y-tether and falling:
+
+        # hide parachute
+        for t in parachute.triangles:
+            t.visible   = False
 
         # rocket momentum = mass times velocity
         momentum        = rocket.mass * mag(rocket.velocity)
