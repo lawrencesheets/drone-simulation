@@ -13,6 +13,7 @@ from        parachute   import Parachute
 
 scene                   = canvas(height=800, width=1200)
 scene.camera.pos        = vector(0, 100, 0)
+
 ground                  = box(pos=vector(0,0,0), size=vector(5000,1,5000), texture="http://cdn.towall.net/l/water-sea.jpg" )
 target                  = sphere(pos=vector(0, 100, 0), radius=1, color=color.yellow)
 target1                 = sphere(pos=target.pos+x_hat*100, radius=1, color=color.yellow)
@@ -36,13 +37,9 @@ toggle_visibility([target] + targets)
 
 for x in range(10000):
     y = 0
-
     for freq in frequencies:
         y += freq.y(x)
-
     points.append(y)
-
-
 
 drones                  = [Drone(target,x) for x in range(4)]
 tether                  = 10
@@ -72,14 +69,12 @@ a                       = vertex(pos=drones[0].pos-(y_hat*tether), color=color.g
 b                       = vertex(pos=drones[1].pos-(y_hat*tether), color=color.gray(0.5), opacity=0.5)
 c                       = vertex(pos=drones[2].pos-(y_hat*tether), color=color.gray(0.5), opacity=0.5)
 d                       = vertex(pos=drones[3].pos-(y_hat*tether), color=color.gray(0.5), opacity=0.5)
-
 net                     = quad( v0=a, v1=b, v2=c, v3=d)
-
 rocket                  = Rocket()
 parachute               = Parachute(rocket)
 wind                    = Wind()
 
-trajectory              = cylinder(pos=rocket.pos, axis=vector(0,-rocket.pos.y,0), color=color.black, radius=0.25, opacity=0.25)
+# trajectory              = cylinder(pos=rocket.pos, axis=vector(0,-rocket.pos.y,0), color=color.black, radius=0.25, opacity=0.25)
 falling                 = True
 elapsed                 = 0
 angle                   = 0
@@ -110,8 +105,8 @@ while True:
             angle       += 1
         rocket.render.pos = rocket.pos
 
-    trajectory.pos      = rocket.pos
-    trajectory.axis.y   = -rocket.pos.y
+    # trajectory.pos      = rocket.pos
+    # trajectory.axis.y   = -rocket.pos.y
 
     target.pos.x        = rocket.pos.x
     target.pos.z        = rocket.pos.z
@@ -121,7 +116,7 @@ while True:
     target3.pos         = target.pos-x_hat*100
     target4.pos         = target.pos-z_hat*100
 
-    scene.center        = target.pos
+    # scene.center        = target.pos
 
     if rocket.pos.y < target.pos.y-tether and falling:
 
@@ -144,7 +139,6 @@ while True:
         r_vel.mag       = velocity
 
         for drone in drones:
-
             drone.velocity += r_vel
 
         rocket.mass     = 0

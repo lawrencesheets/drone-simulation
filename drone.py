@@ -42,7 +42,7 @@ class Drone(object):
         self.x_prevError.y = 0
 
         # arrows that show the force vector
-        self.thrustVector = arrow(pos=self.pos-vector(0,self.radius/2,0)-self.orientation*self.force*self.throttle*0.1, axis=self.orientation*self.force*self.throttle*0.1, shaftwidth=0.5, color=color.red)
+        # self.thrustVector = arrow(pos=self.pos-vector(0,self.radius/2,0)-self.orientation*self.force*self.throttle*0.1, axis=self.orientation*self.force*self.throttle*0.1, shaftwidth=0.5, color=color.red)
 
 
     def update(self):
@@ -58,8 +58,8 @@ class Drone(object):
         self.altitude   = self.pos.y
 
         # update force vector arrow
-        self.thrustVector.pos = self.pos-vector(0,self.radius/2,0)-self.orientation*self.force*self.throttle*0.1
-        self.thrustVector.axis = self.orientation*self.force*self.throttle*0.1
+        # self.thrustVector.pos = self.pos-vector(0,self.radius/2,0)-self.orientation*self.force*self.throttle*0.1
+        # self.thrustVector.axis = self.orientation*self.force*self.throttle*0.1
 
         # update body
         self.propellers[0].pos = self.pos+(x_hat*6)
