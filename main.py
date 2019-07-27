@@ -100,10 +100,16 @@ while True:
         rocket.update(wind, parachute)
     else:
         rocket.pos.y    = sum([d.pos.y for d in drones]) / len(drones) - tether
+        rocket.pos.x    = sum([d.pos.x for d in drones]) / len(drones)
+        rocket.pos.z    = sum([d.pos.z for d in drones]) / len(drones)
         if angle < 180:
             rocket.render.rotate(angle=radians(0.5), axis=vector(-wind.velocity.z, 0, wind.velocity.x))
             angle       += 1
         rocket.render.pos = rocket.pos
+
+        #apply gravity to parachutes
+        for v in parachute.vertices:
+            v.pos       += y_hat * gravity * dt
 
     # trajectory.pos      = rocket.pos
     # trajectory.axis.y   = -rocket.pos.y
@@ -121,8 +127,8 @@ while True:
     if rocket.pos.y < target.pos.y-tether and falling:
 
         # hide parachute
-        for t in parachute.triangles:
-            t.visible   = False
+        # for t in parachute.triangles:
+        #     t.visible   = False
 
         # rocket momentum = mass times velocity
         momentum        = rocket.mass * mag(rocket.velocity)

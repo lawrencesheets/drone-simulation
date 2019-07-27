@@ -14,7 +14,7 @@ class Wind(object):
 
     def rotate(self, angle):
 
-        self.velocity   = rotate(x_hat, angle=radians(angle), axis=y_hat)
+        self.velocity   += rotate(x_hat, angle=radians(angle), axis=y_hat)
 
 
     def scale(self, mag):
