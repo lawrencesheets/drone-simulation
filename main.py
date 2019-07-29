@@ -14,12 +14,14 @@ from        parachute   import Parachute
 scene                   = canvas(height=800, width=1200)
 scene.camera.pos        = vector(0, 100, 0)
 
-ground                  = box(pos=vector(0,0,0), size=vector(5000,1,5000), texture="http://cdn.towall.net/l/water-sea.jpg" )
+dimensions              = [3000,3000] # [m]
+
+ground                  = box(pos=vector(0,0,0), size=vector(dimensions[0],1,dimensions[1]), texture="http://cdn.towall.net/l/water-sea.jpg" )
 target                  = sphere(pos=vector(0, 100, 0), radius=1, color=color.yellow)
-target1                 = sphere(pos=target.pos+x_hat*100, radius=1, color=color.yellow)
-target2                 = sphere(pos=target.pos+z_hat*100, radius=1, color=color.yellow)
-target3                 = sphere(pos=target.pos-x_hat*100, radius=1, color=color.yellow)
-target4                 = sphere(pos=target.pos-z_hat*100, radius=1, color=color.yellow)
+target1                 = sphere(pos=target.pos+x_hat*30, radius=1, color=color.yellow)
+target2                 = sphere(pos=target.pos+z_hat*30, radius=1, color=color.yellow)
+target3                 = sphere(pos=target.pos-x_hat*30, radius=1, color=color.yellow)
+target4                 = sphere(pos=target.pos-z_hat*30, radius=1, color=color.yellow)
 target1.index           = 0
 target2.index           = 1
 target3.index           = 2
@@ -42,7 +44,8 @@ for x in range(10000):
     points.append(y)
 
 drones                  = [Drone(target,x) for x in range(4)]
-tether                  = 10
+tether                  = 6  # [m]
+tethers                 = []
 distances               = []
 temp_drones             = copy.copy(drones)
 temp_targets            = copy.copy(targets)
@@ -70,6 +73,11 @@ b                       = vertex(pos=drones[1].pos-(y_hat*tether), color=color.g
 c                       = vertex(pos=drones[2].pos-(y_hat*tether), color=color.gray(0.5), opacity=0.5)
 d                       = vertex(pos=drones[3].pos-(y_hat*tether), color=color.gray(0.5), opacity=0.5)
 net                     = quad( v0=a, v1=b, v2=c, v3=d)
+
+# for i in range(len(drones)):
+#     t = cylinder( pos=drones[i].pos, axis=vector(0,-tether,0), radius=0.1 )
+#     tethers.append(t)
+
 rocket                  = Rocket()
 parachute               = Parachute(rocket)
 wind                    = Wind()
@@ -91,6 +99,9 @@ while True:
     net.v1.pos          = drones[1].pos-(y_hat*tether)
     net.v2.pos          = drones[2].pos-(y_hat*tether)
     net.v3.pos          = drones[3].pos-(y_hat*tether)
+
+    # for i in range(len(drones)):
+    #     tethers[i].pos = drones[i].pos
 
     # adjust wind
     wind.rotate(points[elapsed])
@@ -117,10 +128,10 @@ while True:
     target.pos.x        = rocket.pos.x
     target.pos.z        = rocket.pos.z
 
-    target1.pos         = target.pos+x_hat*100
-    target2.pos         = target.pos+z_hat*100
-    target3.pos         = target.pos-x_hat*100
-    target4.pos         = target.pos-z_hat*100
+    target1.pos         = target.pos+x_hat*30
+    target2.pos         = target.pos+z_hat*30
+    target3.pos         = target.pos-x_hat*30
+    target4.pos         = target.pos-z_hat*30
 
     # scene.center        = target.pos
 

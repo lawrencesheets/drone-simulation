@@ -13,20 +13,20 @@ class Drone(object):
         self.index      = index
         self.pos        = vector(np.random.randint(-500, 500), np.random.randint(0, 200), np.random.randint(-500, 500))
         self.velocity   = vector(0, 0, 0)
-        self.radius     = 2
+        self.radius     = 2     # [m]
         self.axis       = vector(0, 1, 0)
-        self.render     = box(pos=self.pos, size=vector(5,1,5))
+        self.render     = box(pos=self.pos, size=vector(1.5,0.25,1.5))
         self.render.rotate(angle=radians(45), axis=y_hat)
         self.propellers = [
-            cylinder(pos=self.pos+(x_hat*6), axis=self.axis*0.25, radius=1),
-            cylinder(pos=self.pos-(x_hat*6), axis=self.axis*0.25, radius=1),
-            cylinder(pos=self.pos+(z_hat*6), axis=self.axis*0.25, radius=1),
-            cylinder(pos=self.pos-(z_hat*6), axis=self.axis*0.25, radius=1),
+            cylinder(pos=self.pos+(x_hat*1.5), axis=self.axis*0.05, radius=0.33),
+            cylinder(pos=self.pos-(x_hat*1.5), axis=self.axis*0.05, radius=0.33),
+            cylinder(pos=self.pos+(z_hat*1.5), axis=self.axis*0.05, radius=0.33),
+            cylinder(pos=self.pos-(z_hat*1.5), axis=self.axis*0.05, radius=0.33),
         ]
-        self.mass       = 50
+        self.mass       = 50    # [kg]
         self.orientation = y_hat
         self.throttle   = 1.0
-        self.force      = (250 + self.mass) * abs(gravity)
+        self.force      = (250 + self.mass) * abs(gravity)  # [N]
         self.altitude   = self.pos.y
         self.KP         = 0.1
         self.KI         = 0.0
@@ -62,10 +62,10 @@ class Drone(object):
         # self.thrustVector.axis = self.orientation*self.force*self.throttle*0.1
 
         # update body
-        self.propellers[0].pos = self.pos+(x_hat*6)
-        self.propellers[1].pos = self.pos-(x_hat*6)
-        self.propellers[2].pos = self.pos+(z_hat*6)
-        self.propellers[3].pos = self.pos-(z_hat*6)
+        self.propellers[0].pos = self.pos+(x_hat*1.5)
+        self.propellers[1].pos = self.pos-(x_hat*1.5)
+        self.propellers[2].pos = self.pos+(z_hat*1.5)
+        self.propellers[3].pos = self.pos-(z_hat*1.5)
 
 
 

@@ -13,7 +13,7 @@ class Parachute(object):
         count = 0
         for i in range(5):
             for j in self.frange(0.0,2*math.pi,math.pi*0.1):
-                self.vertices.append(vertex(pos=vector(sin(j) * (30 - (5*i)), sin(i/4*(math.pi/2))*15, cos(j) * (30 - (5*i))) ))
+                self.vertices.append(vertex(pos=vector(sin(j) * (10 - (2*i)), sin(i/4*(math.pi/2))*5, cos(j) * (10 - (2*i))) ))
                 if parent:
                     self.vertices[count].pos += parent.pos + parent.axis*3
                 if count%2 == 0:
