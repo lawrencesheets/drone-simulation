@@ -9,14 +9,14 @@ class Rocket(object):
 
     def __init__(self):
 
-        self.pos        = vector(0, 500, 0)
+        self.pos        = vector(0, 500, 0)     # [m]
         self.axis       = vector(0, 12, 0)      # [m]
-        self.radius     = 1     # [m]
-        self.mass       = 377   # [kg]
+        self.radius     = 1                     # [m]
+        self.mass       = 377                   # [kg]
         self.C_d        = 0.7
         self.velocity   = vector(0, 0, 0)
         self.render     = cylinder(pos=self.pos, axis=self.axis, radius=self.radius)
-        self.Xa         = 47.5  # [m**2]
+        self.Xa         = 47.5                  # [m**2]
 
     def update(self, wind, parachute):
 

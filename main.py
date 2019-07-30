@@ -17,11 +17,13 @@ scene.camera.pos        = vector(0, 100, 0)
 dimensions              = [3000,3000] # [m]
 
 ground                  = box(pos=vector(0,0,0), size=vector(dimensions[0],1,dimensions[1]), texture="http://cdn.towall.net/l/water-sea.jpg" )
-target                  = sphere(pos=vector(0, 100, 0), radius=1, color=color.yellow)
-target1                 = sphere(pos=target.pos+x_hat*30, radius=1, color=color.yellow)
-target2                 = sphere(pos=target.pos+z_hat*30, radius=1, color=color.yellow)
-target3                 = sphere(pos=target.pos-x_hat*30, radius=1, color=color.yellow)
-target4                 = sphere(pos=target.pos-z_hat*30, radius=1, color=color.yellow)
+len                     = 30    # [m] length of sides of net
+drone_height            = 100   # [m] default height of drones
+target                  = sphere(pos=vector(0, drone_height, 0), radius=1, color=color.yellow)
+target1                 = sphere(pos=target.pos+x_hat*len, radius=1, color=color.yellow)
+target2                 = sphere(pos=target.pos+z_hat*len, radius=1, color=color.yellow)
+target3                 = sphere(pos=target.pos-x_hat*len, radius=1, color=color.yellow)
+target4                 = sphere(pos=target.pos-z_hat*len, radius=1, color=color.yellow)
 target1.index           = 0
 target2.index           = 1
 target3.index           = 2
@@ -67,12 +69,8 @@ for x in range(len(targets)):
     distances           = []
 
 drones.sort(key=lambda x: x.target.index, reverse=True)
-
-a                       = vertex(pos=drones[0].pos-(y_hat*tether), color=color.gray(0.5), opacity=0.5)
-b                       = vertex(pos=drones[1].pos-(y_hat*tether), color=color.gray(0.5), opacity=0.5)
-c                       = vertex(pos=drones[2].pos-(y_hat*tether), color=color.gray(0.5), opacity=0.5)
-d                       = vertex(pos=drones[3].pos-(y_hat*tether), color=color.gray(0.5), opacity=0.5)
-net                     = quad( v0=a, v1=b, v2=c, v3=d)
+vertices                = [vertex(pos=drones[i].pos-(y_hat*tether), color=color.gray(0.5), opacity=0.5) for i in range(len(drones))]
+net                     = quad( v0=vertices[0], v1=vertices[1], v2=vertices[2], v3=vertices[3])
 
 # for i in range(len(drones)):
 #     t = cylinder( pos=drones[i].pos, axis=vector(0,-tether,0), radius=0.1 )
@@ -128,10 +126,10 @@ while True:
     target.pos.x        = rocket.pos.x
     target.pos.z        = rocket.pos.z
 
-    target1.pos         = target.pos+x_hat*30
-    target2.pos         = target.pos+z_hat*30
-    target3.pos         = target.pos-x_hat*30
-    target4.pos         = target.pos-z_hat*30
+    target1.pos         = target.pos+x_hat*len
+    target2.pos         = target.pos+z_hat*len
+    target3.pos         = target.pos-x_hat*len
+    target4.pos         = target.pos-z_hat*len
 
     # scene.center        = target.pos
 
