@@ -17,13 +17,13 @@ scene.camera.pos        = vector(0, 100, 0)
 dimensions              = [3000,3000] # [m]
 
 ground                  = box(pos=vector(0,0,0), size=vector(dimensions[0],1,dimensions[1]), texture="http://cdn.towall.net/l/water-sea.jpg" )
-len                     = 30    # [m] length of sides of net
+length                  = 30    # [m] length of sides of net
 drone_height            = 100   # [m] default height of drones
 target                  = sphere(pos=vector(0, drone_height, 0), radius=1, color=color.yellow)
-target1                 = sphere(pos=target.pos+x_hat*len, radius=1, color=color.yellow)
-target2                 = sphere(pos=target.pos+z_hat*len, radius=1, color=color.yellow)
-target3                 = sphere(pos=target.pos-x_hat*len, radius=1, color=color.yellow)
-target4                 = sphere(pos=target.pos-z_hat*len, radius=1, color=color.yellow)
+target1                 = sphere(pos=target.pos+x_hat*length, radius=1, color=color.yellow)
+target2                 = sphere(pos=target.pos+z_hat*length, radius=1, color=color.yellow)
+target3                 = sphere(pos=target.pos-x_hat*length, radius=1, color=color.yellow)
+target4                 = sphere(pos=target.pos-z_hat*length, radius=1, color=color.yellow)
 target1.index           = 0
 target2.index           = 1
 target3.index           = 2
@@ -126,10 +126,10 @@ while True:
     target.pos.x        = rocket.pos.x
     target.pos.z        = rocket.pos.z
 
-    target1.pos         = target.pos+x_hat*len
-    target2.pos         = target.pos+z_hat*len
-    target3.pos         = target.pos-x_hat*len
-    target4.pos         = target.pos-z_hat*len
+    target1.pos         = target.pos+x_hat*length
+    target2.pos         = target.pos+z_hat*length
+    target3.pos         = target.pos-x_hat*length
+    target4.pos         = target.pos-z_hat*length
 
     # scene.center        = target.pos
 

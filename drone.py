@@ -23,7 +23,7 @@ class Drone(object):
             cylinder(pos=self.pos+(z_hat*1.5), axis=self.axis*0.05, radius=0.33),
             cylinder(pos=self.pos-(z_hat*1.5), axis=self.axis*0.05, radius=0.33),
         ]
-        self.mass       = 50    # [kg]
+        self.mass       = 100    # [kg]
         self.orientation = y_hat
         self.throttle   = 1.0
         self.force      = (250 + self.mass) * abs(gravity)  # [N]
