@@ -12,7 +12,9 @@ class Drone(object):
         self.target     = target
         self.index      = index
         self.pos        = vector(np.random.randint(-500, 500), np.random.randint(0, 200), np.random.randint(-500, 500))
+        self.altitude   = self.pos.y
         self.velocity   = vector(0, 0, 0)
+        self.orientation = y_hat
         self.radius     = 2     # [m]
         self.axis       = vector(0, 1, 0)
         self.render     = box(pos=self.pos, size=vector(1.5,0.25,1.5))
@@ -23,11 +25,10 @@ class Drone(object):
             cylinder(pos=self.pos+(z_hat*1.5), axis=self.axis*0.05, radius=0.33),
             cylinder(pos=self.pos-(z_hat*1.5), axis=self.axis*0.05, radius=0.33),
         ]
-        self.mass       = 100    # [kg]
-        self.orientation = y_hat
+        self.mass       = 75    # [kg] https://www.digitaltrends.com/cool-tech/norway-griff-300-megadrone/
+        self.max_lift   = 300   # [kg] https://www.digitaltrends.com/cool-tech/norway-griff-300-megadrone/
+        self.force      = (self.max_lift + self.mass) * abs(gravity)  # [N]
         self.throttle   = 1.0
-        self.force      = (250 + self.mass) * abs(gravity)  # [N]
-        self.altitude   = self.pos.y
         self.KP         = 0.1
         self.KI         = 0.0
         self.KD         = 10.0
